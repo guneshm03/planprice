@@ -1,0 +1,17 @@
+# Usage assumptions for the multi-region example (illustrative figures).
+version: 1
+resource_usage:
+  aws_instance.primary:
+    monthly_cpu_credit_hours: 120
+  aws_instance.standby:
+    monthly_hours: 200
+    monthly_cpu_credit_hours: 0
+  aws_s3_bucket.archive:
+    storage_classes:
+      glacier_flexible_retrieval:
+        storage_gb: 50000
+      standard_infrequent_access:
+        storage_gb: 4000
+        monthly_retrieval_gb: 50
+  aws_elb.legacy:
+    monthly_data_processed_gb: 250

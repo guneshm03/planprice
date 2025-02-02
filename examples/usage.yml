@@ -1,0 +1,43 @@
+# Usage assumptions for the example stack (base and head plans). These are
+# illustrative figures, not measurements of any real workload.
+version: 1
+
+defaults:
+  aws_lambda_function:
+    request_duration_ms: 300
+
+resource_usage:
+  aws_lambda_function.thumbnailer:
+    monthly_requests: 4000000
+    request_duration_ms: 180
+
+  aws_lambda_function.workers[*]:
+    monthly_requests: 250000
+    request_duration_ms: 2400
+
+  module.data.aws_s3_bucket.assets:
+    storage_classes:
+      standard:
+        storage_gb: 2500
+        monthly_tier_1_requests: 400000
+        monthly_tier_2_requests: 12000000
+      standard_infrequent_access:
+        storage_gb: 8000
+        monthly_retrieval_gb: 300
+
+  module.data.aws_s3_bucket.logs:
+    storage_classes:
+      glacier_instant_retrieval:
+        storage_gb: 20000
+
+  module.data.aws_db_instance.main:
+    additional_backup_storage_gb: 150
+
+  module.web.aws_nat_gateway.egress[*]:
+    monthly_data_processed_gb: 600
+
+  module.web.aws_lb.app:
+    average_capacity_units: 3
+
+  aws_lb.ingest:
+    average_capacity_units: 2
