@@ -1,0 +1,31 @@
+{
+  "formatVersion": "v1.0",
+  "disclaimer": "fixture modelled on the AWS offer-file layout",
+  "offerCode": "AmazonEC2",
+  "version": "20260101000000",
+  "publicationDate": "2026-01-01T00:00:00Z",
+  "products": {
+    "SKU1": {"sku": "SKU1", "productFamily": "Compute Instance", "attributes": {"locationType": "AWS Region", "instanceType": "t3.micro", "operatingSystem": "Linux", "tenancy": "Shared", "capacitystatus": "Used", "preInstalledSw": "NA", "licenseModel": "No License required", "usagetype": "EU-BoxUsage:t3.micro", "operation": "RunInstances"}},
+    "SKU2": {"sku": "SKU2", "productFamily": "Compute Instance", "attributes": {"locationType": "AWS Region", "instanceType": "t3.micro", "operatingSystem": "Linux", "tenancy": "Dedicated", "capacitystatus": "Used", "preInstalledSw": "NA", "licenseModel": "No License required", "usagetype": "EU-DedicatedUsage:t3.micro", "operation": "RunInstances"}},
+    "SKU3": {"sku": "SKU3", "productFamily": "Storage", "attributes": {"locationType": "AWS Region", "volumeApiName": "gp3", "usagetype": "EU-EBS:VolumeUsage.gp3"}},
+    "SKU4": {"sku": "SKU4", "productFamily": "NAT Gateway", "attributes": {"locationType": "AWS Region", "usagetype": "EU-NatGateway-Hours"}},
+    "SKU5": {"sku": "SKU5", "productFamily": "NAT Gateway", "attributes": {"locationType": "AWS Region", "usagetype": "EU-NatGateway-Hours", "note": "identical duplicate"}},
+    "SKU6": {"sku": "SKU6", "productFamily": "Compute Instance", "attributes": {"locationType": "AWS Local Zone", "instanceType": "t3.micro", "operatingSystem": "Linux", "tenancy": "Shared", "capacitystatus": "Used", "preInstalledSw": "NA", "licenseModel": "No License required", "usagetype": "EU-BoxUsage:t3.micro", "operation": "RunInstances"}},
+    "SKU7": {"sku": "SKU7", "productFamily": "Data Transfer", "attributes": {"locationType": "AWS Region", "usagetype": "EU-DataTransfer-Out-Bytes"}}
+  },
+  "terms": {
+    "OnDemand": {
+      "SKU1": {"SKU1.JRTCKXETXF": {"offerTermCode": "JRTCKXETXF", "sku": "SKU1", "effectiveDate": "2026-01-01", "priceDimensions": {"SKU1.JRTCKXETXF.6YS6EN2CT7": {"rateCode": "r", "description": "t3.micro", "beginRange": "0", "endRange": "Inf", "unit": "Hrs", "pricePerUnit": {"USD": "0.0114000000"}}}}},
+      "SKU2": {"SKU2.JRTCKXETXF": {"offerTermCode": "JRTCKXETXF", "sku": "SKU2", "effectiveDate": "2026-01-01", "priceDimensions": {"d": {"rateCode": "r", "description": "dedicated", "beginRange": "0", "endRange": "Inf", "unit": "Hrs", "pricePerUnit": {"USD": "0.5"}}}}},
+      "SKU3": {"SKU3.JRTCKXETXF": {"offerTermCode": "JRTCKXETXF", "sku": "SKU3", "effectiveDate": "2026-01-01", "priceDimensions": {"d": {"rateCode": "r", "description": "gp3", "beginRange": "0", "endRange": "Inf", "unit": "GB-Mo", "pricePerUnit": {"USD": "0.0880000000"}}}}},
+      "SKU4": {"SKU4.JRTCKXETXF": {"offerTermCode": "JRTCKXETXF", "sku": "SKU4", "effectiveDate": "2026-01-01", "priceDimensions": {"d": {"rateCode": "r", "description": "nat", "beginRange": "0", "endRange": "Inf", "unit": "Hrs", "pricePerUnit": {"USD": "0.048"}}}}},
+      "SKU5": {"SKU5.JRTCKXETXF": {"offerTermCode": "JRTCKXETXF", "sku": "SKU5", "effectiveDate": "2026-01-01", "priceDimensions": {"d": {"rateCode": "r", "description": "nat", "beginRange": "0", "endRange": "Inf", "unit": "Hrs", "pricePerUnit": {"USD": "0.048"}}}}},
+      "SKU6": {"SKU6.JRTCKXETXF": {"offerTermCode": "JRTCKXETXF", "sku": "SKU6", "effectiveDate": "2026-01-01", "priceDimensions": {"d": {"rateCode": "r", "description": "lz", "beginRange": "0", "endRange": "Inf", "unit": "Hrs", "pricePerUnit": {"USD": "0.02"}}}}},
+      "SKU7": {"SKU7.JRTCKXETXF": {"offerTermCode": "JRTCKXETXF", "sku": "SKU7", "effectiveDate": "2026-01-01", "priceDimensions": {"d": {"rateCode": "r", "description": "dt", "beginRange": "0", "endRange": "Inf", "unit": "GB", "pricePerUnit": {"USD": "0.09"}}}}}
+    },
+    "Reserved": {
+      "SKU1": {"SKU1.4NA7Y494T4": {"offerTermCode": "4NA7Y494T4", "sku": "SKU1", "priceDimensions": {"x": {"unit": "Hrs", "pricePerUnit": {"USD": "0.007"}}}, "termAttributes": {"LeaseContractLength": "1yr"}}}
+    }
+  },
+  "attributesList": {"instanceType": ["t3.micro"]}
+}
