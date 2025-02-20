@@ -1,0 +1,280 @@
+{
+  "label": "testdata/plans/multi-region.json",
+  "currency": "USD",
+  "monthly_cost": 896.356,
+  "resources": [
+    {
+      "address": "aws_db_instance.replica",
+      "type": "aws_db_instance",
+      "region": "eu-west-1",
+      "region_source": "resource attribute",
+      "action": "create",
+      "monthly_cost": 530.61,
+      "components": [
+        {
+          "key": "instance",
+          "name": "Database instance (MySQL, Single-AZ, db.r6g.large)",
+          "unit": "hours",
+          "monthly_quantity": 730,
+          "unit_price": 0.237,
+          "monthly_cost": 173.01,
+          "status": "priced",
+          "sku": "TSZG7B3W4GC58KRT"
+        },
+        {
+          "key": "storage",
+          "name": "Storage (io1)",
+          "unit": "GB-months",
+          "monthly_quantity": 200,
+          "unit_price": 0.138,
+          "monthly_cost": 27.6,
+          "status": "priced",
+          "sku": "DEEBJTH46CYJPKST"
+        },
+        {
+          "key": "iops",
+          "name": "Provisioned IOPS (io1)",
+          "unit": "IOPS-months",
+          "monthly_quantity": 3000,
+          "unit_price": 0.11,
+          "monthly_cost": 330,
+          "status": "priced",
+          "sku": "XNCEX6UXU4G2F8GK"
+        }
+      ]
+    },
+    {
+      "address": "aws_elb.legacy",
+      "type": "aws_elb",
+      "region": "us-east-1",
+      "region_source": "resource attribute",
+      "action": "create",
+      "monthly_cost": 20.25,
+      "components": [
+        {
+          "key": "hours",
+          "name": "Classic load balancer",
+          "unit": "hours",
+          "monthly_quantity": 730,
+          "unit_price": 0.025,
+          "monthly_cost": 18.25,
+          "status": "priced",
+          "sku": "6XT9C7FFNQ3T39YK"
+        },
+        {
+          "key": "data",
+          "name": "Data processed",
+          "unit": "GB",
+          "monthly_quantity": 250,
+          "unit_price": 0.008,
+          "monthly_cost": 2,
+          "usage_based": true,
+          "status": "priced",
+          "sku": "NZE73RYFQ8ZCZ553"
+        }
+      ],
+      "usage_sources": [
+        "aws_elb.legacy"
+      ]
+    },
+    {
+      "address": "aws_instance.primary",
+      "type": "aws_instance",
+      "region": "us-east-1",
+      "region_source": "resource attribute",
+      "action": "create",
+      "monthly_cost": 93.236,
+      "components": [
+        {
+          "key": "instance",
+          "name": "Instance usage (Linux, on-demand, t3.large)",
+          "unit": "hours",
+          "monthly_quantity": 730,
+          "unit_price": 0.0832,
+          "monthly_cost": 60.736,
+          "status": "priced",
+          "sku": "HBVJM3Q9S8K6MNPJ"
+        },
+        {
+          "key": "cpu_credits",
+          "name": "CPU credits (t3 unlimited)",
+          "unit": "vCPU-hours",
+          "monthly_quantity": 120,
+          "unit_price": 0.05,
+          "monthly_cost": 6,
+          "usage_based": true,
+          "status": "priced",
+          "sku": "DHXM9J4FT38HQAQ6"
+        }
+      ],
+      "groups": [
+        {
+          "key": "root_block_device",
+          "name": "root_block_device",
+          "monthly_cost": 4,
+          "components": [
+            {
+              "key": "storage",
+              "name": "Storage (gp2)",
+              "unit": "GB-months",
+              "monthly_quantity": 40,
+              "unit_price": 0.1,
+              "monthly_cost": 4,
+              "status": "priced",
+              "sku": "HY3BZPP2B6K8MSJF"
+            }
+          ]
+        },
+        {
+          "key": "ebs_block_device:/dev/sdf",
+          "name": "ebs_block_device (/dev/sdf)",
+          "monthly_cost": 22.5,
+          "components": [
+            {
+              "key": "storage",
+              "name": "Storage (st1)",
+              "unit": "GB-months",
+              "monthly_quantity": 500,
+              "unit_price": 0.045,
+              "monthly_cost": 22.5,
+              "status": "priced",
+              "sku": "YQT3C842QHBG6XCU"
+            }
+          ]
+        }
+      ],
+      "usage_sources": [
+        "aws_instance.primary"
+      ]
+    },
+    {
+      "address": "aws_instance.standby",
+      "type": "aws_instance",
+      "region": "eu-west-1",
+      "region_source": "resource attribute",
+      "action": "create",
+      "monthly_cost": 21.76,
+      "components": [
+        {
+          "key": "instance",
+          "name": "Instance usage (Linux, on-demand, t3.large)",
+          "unit": "hours",
+          "monthly_quantity": 200,
+          "unit_price": 0.0912,
+          "monthly_cost": 18.24,
+          "status": "priced",
+          "sku": "SGF4MSKWRV77VRXR"
+        },
+        {
+          "key": "cpu_credits",
+          "name": "CPU credits (t3 unlimited)",
+          "unit": "vCPU-hours",
+          "monthly_quantity": 0,
+          "unit_price": 0.05,
+          "monthly_cost": 0,
+          "usage_based": true,
+          "status": "priced",
+          "sku": "Z25C5STUBANBQC5Y"
+        }
+      ],
+      "groups": [
+        {
+          "key": "root_block_device",
+          "name": "root_block_device",
+          "monthly_cost": 3.52,
+          "components": [
+            {
+              "key": "storage",
+              "name": "Storage (gp3)",
+              "unit": "GB-months",
+              "monthly_quantity": 40,
+              "unit_price": 0.088,
+              "monthly_cost": 3.52,
+              "status": "priced",
+              "sku": "TXACT7E3PV6ZX2NM"
+            }
+          ]
+        }
+      ],
+      "usage_sources": [
+        "aws_instance.standby"
+      ]
+    },
+    {
+      "address": "aws_s3_bucket.archive",
+      "type": "aws_s3_bucket",
+      "region": "eu-west-1",
+      "region_source": "resource attribute",
+      "action": "create",
+      "monthly_cost": 230.5,
+      "components": null,
+      "groups": [
+        {
+          "key": "standard_infrequent_access",
+          "name": "standard_infrequent_access",
+          "monthly_cost": 50.5,
+          "components": [
+            {
+              "key": "storage",
+              "name": "Storage",
+              "unit": "GB-months",
+              "monthly_quantity": 4000,
+              "unit_price": 0.0125,
+              "monthly_cost": 50,
+              "usage_based": true,
+              "status": "priced",
+              "sku": "62UY3D5HXV9CXNMK"
+            },
+            {
+              "key": "retrieval",
+              "name": "Data retrieval",
+              "unit": "GB",
+              "monthly_quantity": 50,
+              "unit_price": 0.01,
+              "monthly_cost": 0.5,
+              "usage_based": true,
+              "status": "priced",
+              "sku": "C6SA6BXUYCDNK39C"
+            }
+          ]
+        },
+        {
+          "key": "glacier_flexible_retrieval",
+          "name": "glacier_flexible_retrieval",
+          "monthly_cost": 180,
+          "components": [
+            {
+              "key": "storage",
+              "name": "Storage",
+              "unit": "GB-months",
+              "monthly_quantity": 50000,
+              "unit_price": 0.0036,
+              "monthly_cost": 180,
+              "usage_based": true,
+              "status": "priced",
+              "sku": "SX7QQVPF4M2A4YZ2"
+            }
+          ]
+        }
+      ],
+      "usage_sources": [
+        "aws_s3_bucket.archive"
+      ]
+    }
+  ],
+  "free_resources": [],
+  "unsupported_resources": [],
+  "summary": {
+    "supported_resources": 5,
+    "free_resources": 0,
+    "unsupported_resources": 0,
+    "priced_components": 15,
+    "components_missing_usage": 0,
+    "components_not_priced": 0
+  },
+  "warnings": [],
+  "price_snapshot": {
+    "generated_at": "2026-10-25",
+    "source": "AWS Price List Bulk API (public, on-demand terms only)"
+  }
+}
