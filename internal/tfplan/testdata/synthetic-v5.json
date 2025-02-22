@@ -1,0 +1,95 @@
+{
+  "format_version": "1.2",
+  "terraform_version": "1.9.0",
+  "variables": {
+    "region": {"value": "eu-west-1"}
+  },
+  "resource_changes": [
+    {
+      "address": "aws_instance.app",
+      "mode": "managed", "type": "aws_instance", "name": "app",
+      "provider_name": "registry.terraform.io/hashicorp/aws",
+      "change": {
+        "actions": ["update"],
+        "before": {"instance_type": "t3.small", "root_block_device": [{"volume_size": 20, "volume_type": "gp3"}]},
+        "after":  {"instance_type": "t3.large", "root_block_device": [{"volume_size": 20, "volume_type": "gp3"}]},
+        "after_unknown": {"root_block_device": [{"iops": true}]}
+      }
+    },
+    {
+      "address": "aws_ebs_volume.old",
+      "mode": "managed", "type": "aws_ebs_volume", "name": "old",
+      "provider_name": "registry.terraform.io/hashicorp/aws",
+      "change": {"actions": ["delete"], "before": {"type": "gp2", "size": 100}, "after": null, "after_unknown": {}}
+    },
+    {
+      "address": "aws_db_instance.db",
+      "mode": "managed", "type": "aws_db_instance", "name": "db",
+      "provider_name": "registry.terraform.io/hashicorp/aws",
+      "change": {
+        "actions": ["delete", "create"],
+        "before": {"engine": "mysql", "instance_class": "db.t3.micro", "allocated_storage": 20, "storage_type": "gp2", "multi_az": false},
+        "after":  {"engine": "mysql", "instance_class": "db.t3.small", "allocated_storage": 20, "storage_type": "gp2", "multi_az": false},
+        "after_unknown": {"id": true}
+      }
+    },
+    {
+      "address": "module.edge[\"eu\"].aws_nat_gateway.this[0]",
+      "module_address": "module.edge[\"eu\"]",
+      "mode": "managed", "type": "aws_nat_gateway", "name": "this", "index": 0,
+      "provider_name": "registry.terraform.io/hashicorp/aws",
+      "change": {"actions": ["no-op"], "before": {"subnet_id": "subnet-1"}, "after": {"subnet_id": "subnet-1"}, "after_unknown": {}}
+    },
+    {
+      "address": "module.edge[\"eu\"].aws_s3_bucket.inner",
+      "module_address": "module.edge[\"eu\"]",
+      "mode": "managed", "type": "aws_s3_bucket", "name": "inner",
+      "provider_name": "registry.terraform.io/hashicorp/aws",
+      "change": {"actions": ["create"], "before": null, "after": {"bucket": "x"}, "after_unknown": {"id": true}}
+    },
+    {
+      "address": "aws_lb.unknown_region",
+      "mode": "managed", "type": "aws_lb", "name": "unknown_region",
+      "provider_name": "registry.terraform.io/hashicorp/aws",
+      "change": {"actions": ["create"], "before": null, "after": {"load_balancer_type": "network"}, "after_unknown": {}}
+    },
+    {
+      "address": "data.aws_ami.ubuntu",
+      "mode": "data", "type": "aws_ami", "name": "ubuntu",
+      "provider_name": "registry.terraform.io/hashicorp/aws",
+      "change": {"actions": ["read"], "before": null, "after": {"id": "ami-1"}, "after_unknown": {}}
+    },
+    {
+      "address": "google_compute_instance.vm",
+      "mode": "managed", "type": "google_compute_instance", "name": "vm",
+      "provider_name": "registry.terraform.io/hashicorp/google",
+      "change": {"actions": ["create"], "before": null, "after": {"machine_type": "e2-small"}, "after_unknown": {}}
+    }
+  ],
+  "configuration": {
+    "provider_config": {
+      "aws": {"name": "aws", "expressions": {"region": {"references": ["var.region"]}}},
+      "aws.west": {"name": "aws", "alias": "west", "expressions": {"region": {"constant_value": "us-west-2"}}},
+      "module.edge:aws": {"name": "aws", "module_address": "module.edge", "expressions": {"region": {"constant_value": "us-east-1"}}},
+      "aws.computed": {"name": "aws", "alias": "computed", "expressions": {"region": {"references": ["local.region"]}}}
+    },
+    "root_module": {
+      "resources": [
+        {"address": "aws_instance.app", "mode": "managed", "type": "aws_instance", "provider_config_key": "aws"},
+        {"address": "aws_ebs_volume.old", "mode": "managed", "type": "aws_ebs_volume", "provider_config_key": "aws.west"},
+        {"address": "aws_db_instance.db", "mode": "managed", "type": "aws_db_instance", "provider_config_key": "aws"},
+        {"address": "aws_lb.unknown_region", "mode": "managed", "type": "aws_lb", "provider_config_key": "aws.computed"}
+      ],
+      "module_calls": {
+        "edge": {
+          "module": {
+            "resources": [
+              {"address": "aws_nat_gateway.this", "mode": "managed", "type": "aws_nat_gateway", "provider_config_key": "module.edge:aws"},
+              {"address": "aws_s3_bucket.inner", "mode": "managed", "type": "aws_s3_bucket", "provider_config_key": "aws"}
+            ]
+          }
+        }
+      }
+    }
+  }
+}
